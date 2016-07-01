@@ -10,10 +10,7 @@ class QString;
 
 using namespace std;
 
-// A Document is has a root Deplu Object.
-// In Deplu, an object is different from a value.
-// A object either contains an array of values or an array of objects
-// not both.
+
 class Document : public QObject
 {
     Q_OBJECT
@@ -41,20 +38,20 @@ public:
     bool isEmpty();
 
     // ACCESS
-    weak_ptr<DepluObject> get(); // used to get objects
-    weak_ptr<DepluObject> operator[](int index);
+    weak_ptr<DepluEntity> get(); // used to get objects
+    weak_ptr<DepluEntity> operator[](int index);
     bool getBool();
     QString getString();
     float getFloat();
     double getDouble();
     int getInt();
     long getLong();
-    DepluObject* getNull() { return nullptr; }
+    void* getNull() { return nullptr; }
 
 private:
     // CONTENT
-    shared_ptr<DepluObject> root;
-    QList<shared_ptr<DepluObject>> objectList;
+    shared_ptr<DepluEntity> root;
+    QList<shared_ptr<DepluEntity>> objectList;
 
 signals:
 

@@ -69,8 +69,7 @@ void MainWindow::setupUI(){
 }
 
 
-void MainWindow::on_actionNew_Project_triggered()
-{
+void MainWindow::on_actionNew_Project_triggered(){
     NewProjDialog *dialog = new NewProjDialog(session, this);
     dialog->setModal(true);
     dialog->show();

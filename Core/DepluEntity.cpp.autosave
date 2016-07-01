@@ -1,0 +1,8 @@
+//29/06/16
+#include "DepluEntity.h"
+#include <QString>
+
+DepluEntity::DepluEntity(QObject *parent) : QObject(parent)
+{
+
+}

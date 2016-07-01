@@ -102,7 +102,7 @@ void NewProjDialog::setupErrors(){
         shared_ptr<Session> tmpSession = session.lock();
         projDir = tmpSession->lastCreatedProjDir;
     }
-    catch (bad_weak_ptr b){
+    catch (bad_weak_ptr b){ // actually this exception will never be thrown
         /// LOG ERROR
         qDebug() << tr("Session Has Expired!");
     }

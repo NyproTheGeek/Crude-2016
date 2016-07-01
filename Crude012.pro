@@ -32,8 +32,10 @@ SOURCES += main.cpp\
     GUI/NewProjDialog.cpp \
     GUI/SceneView.cpp \
     Core/Document.cpp \
-    Core/DepluObject.cpp \
-    Session.cpp
+    Session.cpp \
+    Core/DepluEntity.cpp \
+    Core/DepluAttrib.cpp \
+    Core/DepluClass.cpp
 
 HEADERS  += \
     Core/Group.h \
@@ -55,8 +57,10 @@ HEADERS  += \
     GUI/NewProjDialog.h \
     GUI/SceneView.h \
     Core/Document.h \
-    Core/DepluObject.h \
-    Session.h
+    Session.h \
+    Core/DepluEntity.h \
+    Core/DepluAttrib.h \
+    Core/DepluClass.h
 
 FORMS    += \
     GUI/MainWindow.ui \

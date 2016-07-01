@@ -1,6 +1,6 @@
 //29/06/16
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#ifndef DEPLUENTITY_H
+#define DEPLUENTITY_H
 
 #include <memory>
 #include <QObject>
@@ -10,20 +10,12 @@ class QString;
 
 using namespace std;
 
-// A Document is has a root Deplu Object.
-// In Deplu, an object is different from a value.
-// A object either contains an array of values or an array of objects
-// not both.
-class Document : public QObject
+class DepluEntity : public QObject
 {
     Q_OBJECT
 public:
     // CONSTRUCTORS
-    explicit Document(QObject *parent = 0);
-
-    // CONTENT MANAGEMENT
-    void parse(QString&& depluString);
-    void clean();
+    explicit DepluObject(QObject *parent = 0);
 
     // ITERATORS
     bool setIter(int);
@@ -41,8 +33,9 @@ public:
     bool isEmpty();
 
     // ACCESS
-    weak_ptr<DepluObject> get(); // used to get objects
-    weak_ptr<DepluObject> operator[](int index);
+    weak_ptr<DepluEntity> get(); // used to get objects
+    weak_ptr<DepluEntity> getParent();
+    weak_ptr<DepluEntity> operator[](int index);
     bool getBool();
     QString getString();
     float getFloat();
@@ -53,12 +46,13 @@ public:
 
 private:
     // CONTENT
-    shared_ptr<DepluObject> root;
-    QList<shared_ptr<DepluObject>> objectList;
+    weak_ptr<DepluEntity> parent;
+    QList<weak_ptr<DepluEntity>> objectList;
+
 
 signals:
 
 public slots:
 };
 
-#endif // DOCUMENT_H
+#endif // DEPLUENTITY_H
