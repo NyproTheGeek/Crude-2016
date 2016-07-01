@@ -33,7 +33,6 @@ SOURCES += main.cpp\
     GUI/SceneView.cpp \
     Core/Document.cpp \
     Session.cpp \
-    Core/DepluEntity.cpp \
     Core/DepluAttrib.cpp \
     Core/DepluClass.cpp
 
@@ -58,7 +57,6 @@ HEADERS  += \
     GUI/SceneView.h \
     Core/Document.h \
     Session.h \
-    Core/DepluEntity.h \
     Core/DepluAttrib.h \
     Core/DepluClass.h
 

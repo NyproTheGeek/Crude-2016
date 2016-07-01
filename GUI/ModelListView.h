@@ -6,7 +6,6 @@
 class QVBoxLayout;
 class QHBoxLayout;
 class QListView;
-class QLineEdit;
 class QPushButton;
 class QLabel;
 class QFrame;
@@ -34,7 +33,6 @@ private:
     QLabel *titleLabel;
     QPushButton *newButton;
     QPushButton *addButton;
-    QLineEdit *testField;
     QListView *modelList;
 
 

@@ -3,7 +3,6 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QListView>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QLabel>
 #include <QFrame>
@@ -23,7 +22,6 @@ void ModelListView::setupUI(){
     titleLabel = new QLabel(tr("Model List"));
     newButton = new QPushButton(tr("New"));
     addButton = new QPushButton(tr("Add"));
-    testField = new QLineEdit;
     modelList = new QListView;
 
 
@@ -31,7 +29,7 @@ void ModelListView::setupUI(){
     hTitleLayout->addWidget(titleLabel);
     hTitleLayout->addStretch();
 
-    hTopLayout->addWidget(testField);
+    hTopLayout->addStretch();
     hTopLayout->addWidget(newButton);
     hTopLayout->addWidget(addButton);
 

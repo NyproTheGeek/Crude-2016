@@ -2,5 +2,4 @@
 
 DepluClass::DepluClass(QObject *parent) : QObject(parent)
 {
-
 }

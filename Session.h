@@ -18,9 +18,10 @@ public:
 
     QString getHash(); /// TODO
 
+
 signals:
 
 public slots:
 };
 
-#endif // Session_H
+#endif // SESSION_H

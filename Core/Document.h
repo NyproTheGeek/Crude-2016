@@ -5,15 +5,13 @@
 #include <memory>
 #include <QObject>
 #include <QList>
-#include "DepluEntity.h"
+#include "DepluClass.h"
+#include "DepluAttrib.h"
 class QString;
 
 using namespace std;
 
-// A Document is has a root Deplu Object.
-// In Deplu, an object is different from a value.
-// A object either contains an array of values or an array of objects
-// not both.
+
 class Document : public QObject
 {
     Q_OBJECT
@@ -21,16 +19,16 @@ public:
     // CONSTRUCTORS
     explicit Document(QObject *parent = 0);
 
-    // CONTENT MANAGEMENT
-    void parse(QString&& depluString);
-    void clean();
-
     // ITERATORS
     bool setIter(int);
     bool hasNext();
 
+    // PROPERTIES
+    int size;
+
     // CHECKS
-    bool has(QString member); // used to know if it contains objects
+    bool isAClass; // isAnAttrib otherwise
+    bool has(QString member); // used to know if it contains a member
     bool isBool();
     bool isString();
     bool isFloat();
@@ -39,22 +37,38 @@ public:
     bool isLong();
     bool isNull();
     bool isEmpty();
+    bool isArray();
+    bool isClass();
+    bool isAttrib();
+    bool isBool(QString member);
+    bool isString(QString member);
+    bool isFloat(QString member);
+    bool isDouble(QString member);
+    bool isInt(QString member);
+    bool isLong(QString member);
+    bool isNull(QString member);
+    bool isEmpty(QString member);
 
     // ACCESS
-    weak_ptr<DepluObject> get(); // used to get objects
-    weak_ptr<DepluObject> operator[](int index);
+    weak_ptr<DepluEntity> operator[](int index);
     bool getBool();
     QString getString();
     float getFloat();
     double getDouble();
     int getInt();
     long getLong();
-    DepluObject* getNull() { return nullptr; }
+    void* getNull();
+    QString getString(QString member);
+    float getFloat(QString member);
+    double getDouble(QString member);
+    int getInt(QString member);
+    long getLong(QString member);
 
 private:
     // CONTENT
-    shared_ptr<DepluObject> root;
-    QList<shared_ptr<DepluObject>> objectList;
+    shared_ptr<DepluClass> root;
+    QList<shared_ptr<DepluClass>> classList;
+    QList<shared_ptr<DepluAttrib>> attribList;
 
 signals:
 
