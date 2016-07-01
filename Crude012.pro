@@ -34,7 +34,10 @@ SOURCES += main.cpp\
     Core/Document.cpp \
     Session.cpp \
     Core/DepluAttrib.cpp \
-    Core/DepluClass.cpp
+    Core/DepluClass.cpp \
+    Utility/DepluAttrib.cpp \
+    Utility/DepluClass.cpp \
+    Utility/Document.cpp
 
 HEADERS  += \
     Core/Group.h \
@@ -58,7 +61,10 @@ HEADERS  += \
     Core/Document.h \
     Session.h \
     Core/DepluAttrib.h \
-    Core/DepluClass.h
+    Core/DepluClass.h \
+    Utility/DepluAttrib.h \
+    Utility/DepluClass.h \
+    Utility/Document.h
 
 FORMS    += \
     GUI/MainWindow.ui \
