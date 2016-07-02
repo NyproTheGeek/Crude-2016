@@ -1,4 +1,4 @@
 #include "DepluClass.h"
 
-DepluClass::DepluClass(QString name, QObject *parent) : QObject(parent){
+DepluClass::DepluClass(QObject *parent) : QObject(parent){
 }

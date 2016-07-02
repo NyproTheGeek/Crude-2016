@@ -2,10 +2,11 @@
 #define DEPLUCLASS_H
 
 #include <memory>
+#include <utility>
 #include <QObject>
+#include <QString>
+#include <QHash>
 #include <QMap>
-#include "DepluAttrib.h"
-
 using namespace std;
 
 class DepluClass : public QObject
@@ -13,33 +14,13 @@ class DepluClass : public QObject
     Q_OBJECT
 public:
     // CONSTRUCTORS
-    explicit DepluClass(QString name, QObject *parent = 0);
-
-    // CONTENT MANAGEMENT
-    void putAttrib(weak_ptr<DepluAttrib> depluAttrib); // single
-    void putAttrib(weak_ptr<DepluAttrib> &&depluAttrib); // single
-    void putClass(weak_ptr<DepluClass> depluClass); // single
-    void putClass(weak_ptr<DepluClass> &&depluClass); // single
-    void setTemplate(weak_ptr<DepluClass> depluClass); // to set titles // array
-    void setTemplate(weak_ptr<DepluClass> &&depluClass); // to set titles // array
-    void addClass(weak_ptr<DepluClass> &&depluClass); // array
-    void addClass(weak_ptr<DepluClass> &&depluClass); // array
-    void insertAt(); // array
-    void removeAt(); // array
-    void clear();
-
-    // ITERATORS
-    unsigned int iter;
-    bool setIter(unsigned int index);
-    bool hasNext();
+    explicit DepluClass(QObject *parent = 0);
 
     // PROPERTIES
     QString name;
-    unsigned int size;
-    bool array;
 
     // CHECKS
-    bool has(QString member); // used to know if it contains a member
+    bool has(QString member);
     bool isBool(QString member);
     bool isString(QString member);
     bool isFloat(QString member);
@@ -51,7 +32,7 @@ public:
     bool isArray(QString member);
 
     // ACCESS
-    weak_ptr<DepluClass> operator[](const unsigned int index); // array
+    weak_ptr<DepluClass> getObject(QString member);
     QString getString(QString member);
     float getFloat(QString member);
     double getDouble(QString member);
@@ -64,9 +45,10 @@ public:
 private:
     // CONTENT
     shared_ptr<DepluClass> parent;
-    QMap<int, shared_ptr<DepluClass>> classList;
-    QMap<int, shared_ptr<DepluAttrib>> attribList;
-    QMap<int, shared_ptr<DepluClass>> classArray; // seperated for clarity
+    /*! use insertMulti()on Maps instead of insert() for
+     *  duplicate keys to prevent overwriting!*/
+    QMap<QString, pair<QString, int>> attribList; // name-value-index
+    QMap<QString, pair<weak_ptr<DepluClass>, int>> classList; // name-object-index
 
 signals:
 

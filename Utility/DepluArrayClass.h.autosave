@@ -1,0 +1,67 @@
+#ifndef DEPLUARRAYCLASS_H
+#define DEPLUARRAYCLASS_H
+
+#include <memory>
+#include <QObject>
+#include "DepluClass.h"
+using namespace std;
+
+// classes contains objects
+// attrib contains values
+// objects can either be an attrib or another class
+// class->[class, attrib->[value]]
+// class-> 
+
+class DepluArrayClass : public QObject
+{
+    Q_OBJECT
+public:
+    // CONSTRUCTORS
+    explicit DepluArrayClass(QObject *parent = 0);
+    
+    // CONTENT MANAGEMENT
+    void clear();
+    void remove(const unsigned int index);
+    /** array attrib **/
+    void add(QString value);
+    void add(QString &&value);
+    void add(int value);
+    void add(long value);
+    void add(float value);
+    void add(double value);
+    void add(bool value);
+    void add(); // empty
+    void add(void *value); // null // only nullptr allowed
+    void insert(QString value, const unsigned int index);
+    void insert(QString &&value, const unsigned int index);
+    void insert(int value, const unsigned int index);
+    void insert(long value, const unsigned int index);
+    void insert(float value, const unsigned int index);
+    void insert(double value, const unsigned int index);
+    void insert(bool value, const unsigned int index);
+    void insert(const unsigned int index); // empty
+    void insert(void *value, const unsigned int index); // null // only nullptr allowed
+    /** array class **/
+    void add(weak_ptr<DepluClass> object);
+    void add(weak_ptr<DepluArrayClass> arrayObject);
+    void insert(weak_ptr<DepluClass> object, const unsigned int index);
+    void insert(weak_ptr<DepluArrayClass> arrayObject, const unsigned int index);
+    
+    // ITERATORS
+    unsigned int iter;
+    bool setIter(unsigned int index);
+    bool hasNext();
+    
+private:
+    // CONTENT
+    shared_ptr<DepluClass> parent;
+    QMap<int, QString> valueList; // array attrib can be thought of as one-parameter array class
+    QMap<int, weak_ptr<DepluClass>> objectList;
+    QMap<int, weak_ptr<DepluArrayClass>> arrayObjectList;
+    
+signals:
+
+public slots:
+};
+
+#endif // DEPLUARRAYCLASS_H
