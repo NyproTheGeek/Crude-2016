@@ -10,6 +10,7 @@ class QPushButton;
 class QLabel;
 class QFrame;
 class QString;
+class QLineEdit;
 
 
 class ModelListView : public QWidget
@@ -22,7 +23,7 @@ public:
 private:
     // SETUP
     void setupUI();
-//    void setupConnections();
+    void setupConnections();
 
     // UI
     QVBoxLayout *vMainLayout;
@@ -31,6 +32,7 @@ private:
     QHBoxLayout *hTitleLayout;
     QFrame *titleFrame;
     QLabel *titleLabel;
+    QLineEdit *testField; /// FOR TEST PURPOSE ONLY
     QPushButton *newButton;
     QPushButton *addButton;
     QListView *modelList;
@@ -39,6 +41,7 @@ private:
 signals:
 
 public slots:
+    void openMsg(); /// FOR TEST PURPOSE ONLY
 
 };
 

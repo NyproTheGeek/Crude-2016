@@ -3,11 +3,29 @@
 
 #include <QObject>
 
-namespace Deplu {
-    enum Type
-    {
-        Single, Array
-    };
-}
+enum class DepluValue
+{
+    Null, Empty
+};
+
+enum class DepluType
+{
+    Attrib, Class, AttribArray, ClassArray
+};
+
+enum class DepluParseSymbol{
+    Name,
+    Value,
+    OpenBracket, // '('
+    CloseBracket, // ')'
+    OpenBrace, // '['
+    CloseBrace, // ']'
+    Comma, // ','
+    CommaNewLine, // ',' or '\n'
+    Colon, // ':'
+    BlockEnd, // '..'
+    EOL,
+    OBJECT
+};
 
 #endif // DEPLU_H

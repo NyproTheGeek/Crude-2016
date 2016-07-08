@@ -9,7 +9,7 @@
 #include "ModelListView.h"
 #include "NewProjDialog.h"
 
-MainWindow::MainWindow(const weak_ptr<Session> session, QWidget *parent) :
+MainWindow::MainWindow(const std::weak_ptr<Session> session, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-weak_ptr<Session> MainWindow::getSession(){
+std::weak_ptr<Session> MainWindow::getSession(){
     return session;
 }
 

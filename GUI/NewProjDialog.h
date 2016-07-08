@@ -2,11 +2,11 @@
 #ifndef NEWPROJDIALOG_H
 #define NEWPROJDIALOG_H
 
-#include <bitset>
+#include "Session.h"
 #include <QDialog>
 #include <QDir>
+#include <bitset>
 #include <memory>
-#include "../Session.h"
 class QLabel;
 class QLineEdit;
 class QFrame;
@@ -14,23 +14,20 @@ class QPushButton;
 class QGridLayout;
 class QString;
 
-using namespace std;
-
-
-
 class NewProjDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit NewProjDialog(weak_ptr<Session> session, QWidget *parent = 0);
+    // CONSTRUCTORS
+    explicit NewProjDialog(std::weak_ptr<Session> session, QWidget *parent = 0);
 
     // SESSION FUNCTIONS
-    weak_ptr<Session> getSession();
+    std::weak_ptr<Session> getSession();
 
 private:
 
     // SETUP
-    weak_ptr<Session> session; // be careful, dont set to null bcos of getSession()
+    std::weak_ptr<Session> session; // be careful, dont set to null bcos of getSession()
     void setupUI();
     void setupConnections();
     void setupErrors();
@@ -55,7 +52,7 @@ private:
 
     // ERROR
     static const int errorCount = 5;
-    bitset<errorCount> errorFlag;
+    std::bitset<errorCount> errorFlag;
     QString errorList [errorCount];
     void showStatus();
     bool hasError();

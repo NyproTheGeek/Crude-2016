@@ -14,7 +14,7 @@
 #include <QTextStream>
 #include <iostream>
 
-NewProjDialog::NewProjDialog(const weak_ptr<Session> session,  QWidget *parent) : QDialog(parent)
+NewProjDialog::NewProjDialog(const std::weak_ptr<Session> session,  QWidget *parent) : QDialog(parent)
 {
     this->session = session; // this should be on top so that session can be accessed in setupErrors
 
@@ -25,7 +25,7 @@ NewProjDialog::NewProjDialog(const weak_ptr<Session> session,  QWidget *parent) 
     setupErrors();
 }
 
-weak_ptr<Session> NewProjDialog::getSession(){
+std::weak_ptr<Session> NewProjDialog::getSession(){
     return session;
 }
 
@@ -99,10 +99,10 @@ void NewProjDialog::setupErrors(){
 
     // SETTING DEFAULT PROJECT DIR
     try{
-        shared_ptr<Session> tmpSession = session.lock();
+        std::shared_ptr<Session> tmpSession = session.lock();
         projDir = tmpSession->lastCreatedProjDir;
     }
-    catch (bad_weak_ptr b){ // actually this exception will never be thrown
+    catch (std::bad_weak_ptr b){ // actually this exception will never be thrown
         /// LOG ERROR
         qDebug() << tr("Session Has Expired!");
     }
@@ -112,7 +112,8 @@ void NewProjDialog::setupErrors(){
     dirField->setText(projDir);
 
     QDir dir(projDir);
-    if(!dir.exists()){ // check if default directory exists
+    // checking if default directory exists
+    if(!dir.exists()){
        addError(0);
     }
     addError(2); // projName is currently empty and therefore invalid.
@@ -197,7 +198,7 @@ void NewProjDialog::updateProjName(const QString projName){
         removeError(2);
     }
 
-    // checking if specified directory actually exists
+    // checking if specified directory (projdir) actually exists
     QDir dir(projDir);
     if(!dir.exists()){
         addError(0);
@@ -206,9 +207,13 @@ void NewProjDialog::updateProjName(const QString projName){
         removeError(0);
     }
 
-    // checking if folder already exist in specified directory
-    dir.setPath(projPath);
-    if(dir.exists()){
+    // checking if folder (projPath) already exist in specified directory
+    QDir path(projPath);
+    // if projName is "" (empty string)
+    // projPath folder will always exist when the user changes the direcory
+    // because projPath will be the same as projDir
+    // so we must check if projName is empty
+    if(!(projName == "") && path.exists()){
         addError(1);
     }
     else{
@@ -257,7 +262,7 @@ void NewProjDialog::updateProjDir(const QString projDir){
         removeError(2);
     }
 
-    // checking if specified directory actually exists
+    // checking if specified directory (projdir) actually exists
     QDir dir(projDir);
     if(!dir.exists()){
         addError(0);
@@ -266,9 +271,13 @@ void NewProjDialog::updateProjDir(const QString projDir){
         removeError(0);
     }
 
-    // checking if folder already exist in specified directory
-    dir.setPath(projPath);
-    if(dir.exists()){
+    // checking if folder (projPath) already exist in specified directory
+    QDir path(projPath);
+    // if projName is "" (empty string)
+    // projPath folder will always exist when the user changes the direcory
+    // because projPath will be the same as projDir
+    // so we must check if projName is empty
+    if(!(projName == "") && path.exists()){
         addError(1);
     }
     else{
@@ -322,12 +331,12 @@ void NewProjDialog::saveProject(){
         QTextStream toProjDepluFile(&projDepluFile);
         QTextStream toHistoryDepluFile(&historyDepluFle);
 
-        shared_ptr<Session> tmpSession;
+        std::shared_ptr<Session> tmpSession;
         try{
             tmpSession = session.lock();
             projDir = tmpSession->lastCreatedProjDir;
         }
-        catch (bad_weak_ptr b){
+        catch (std::bad_weak_ptr b){
             /// LOG ERROR
             qDebug() << tr("Session Has Expired!");
             QMessageBox::warning(this, tr("Session Error!"), tr("This is quite unfortunate."));

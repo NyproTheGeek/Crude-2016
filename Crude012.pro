@@ -32,9 +32,10 @@ SOURCES += main.cpp\
     GUI/NewProjDialog.cpp \
     GUI/SceneView.cpp \
     Session.cpp \
-    Utility/Document.cpp \
     Utility/DepluArray.cpp \
-    Utility/DepluClass.cpp
+    Utility/DepluClass.cpp \
+    Utility/DepluAttrib.cpp \
+    Exception/DepluException.cpp
 
 HEADERS  += \
     Core/Group.h \
@@ -56,13 +57,16 @@ HEADERS  += \
     GUI/NewProjDialog.h \
     GUI/SceneView.h \
     Session.h \
-    Utility/Document.h \
     Utility/Deplu.h \
     Utility/DepluArray.h \
-    Utility/DepluClass.h
+    Utility/DepluClass.h \
+    Utility/DepluAttrib.h \
+    Exception/DepluException.h
 
 FORMS    += \
     GUI/MainWindow.ui \
     GUI/NewProjDialog.ui
 
-RESOURCES += Themes/DarkStyle/style.qrc
+RESOURCES += Theme/DarkStyle/style.qrc
+
+INCLUDEPATH += C:/Users/Nypro/Documents/Crude012
