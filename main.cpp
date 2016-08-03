@@ -1,11 +1,20 @@
 //17/06/16
+#include "Session.h"
 #include "GUI/MainWindow.h"
 #include <QApplication>
 #include <QFile>
 #include <QTextStream>
+#include <QString>
+//#include <QStringBuilder>
+//#include <QRegularExpression>
+#include <QDebug>
+#include <QDateTime>
+//#include <QCryptographicHash>
 //#include <QPushButton>
 #include <memory>
-#include "Session.h"
+#include <iostream>
+#include <time.h>
+
 
 using namespace std;
 
@@ -23,6 +32,14 @@ int main(int argc, char *argv[])
     }
     else{
         printf("Cannot Open QSS file\n");
+    }
+
+
+    {
+        /*! Tests */
+        for(int i = 0; i < 10; i++)
+            qDebug() << session->getHash(i);
+        /*! Tests */
     }
 
     window.resize(960, 600);

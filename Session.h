@@ -3,6 +3,7 @@
 #define SESSION_H
 
 #include <QObject>
+#include <QJsonObject>
 #include <QString>
 
 class Session : public QObject
@@ -11,14 +12,30 @@ class Session : public QObject
 public:
     explicit Session(QObject *parent = 0);
 
-
     QString lastCreatedProjDir; /// TODO
 
-    QString getDate(); /// TODO
+    QString lastCreatedProj; /// TODO
 
-    QString getHash(); /// TODO
+    QJsonObject defaultHeaderJson;
 
+    QJsonObject defaultProjJson;
 
+    QJsonObject defaultHistoryJson;
+
+    QJsonObject defaultGroupsJson;
+
+    QJsonObject defaultModelsJson;
+
+    QJsonObject defaultMeshFramesJson;
+
+    // UTILITIES
+    QString getDate();
+
+    QString getHash(int extraSeed);
+
+    QString getVersion();
+
+    void jsonFilesInit();
 signals:
 
 public slots:

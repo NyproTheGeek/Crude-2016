@@ -1,4 +1,0 @@
-#include "DepluArrayClass.h"
-
-DepluArrayClass::DepluArrayClass(QObject *parent) : QObject(parent){
-}

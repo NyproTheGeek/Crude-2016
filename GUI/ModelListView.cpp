@@ -55,12 +55,7 @@ void ModelListView::setupConnections(){
 
 void ModelListView::openMsg() /// FOR TEST PURPOSE ONLY
 {
-    std::array<int, 7> myArray= {1, 2, 3, 4};
-    for(int i = 0; i < myArray.size(); i++){
-
-        qDebug() << myArray.at(i);
-    }
-    QMessageBox::information(this,"Information", "QString::number(x)");
+    QMessageBox::information(this,"Information", "Hello there!\nThis is a test.");
 }
 
 

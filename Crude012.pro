@@ -32,10 +32,8 @@ SOURCES += main.cpp\
     GUI/NewProjDialog.cpp \
     GUI/SceneView.cpp \
     Session.cpp \
-    Utility/DepluArray.cpp \
-    Utility/DepluClass.cpp \
-    Utility/DepluAttrib.cpp \
-    Exception/DepluException.cpp
+    Exception/DepluException.cpp \
+    Utility/StringUtils.cpp \
 
 HEADERS  += \
     Core/Group.h \
@@ -57,11 +55,8 @@ HEADERS  += \
     GUI/NewProjDialog.h \
     GUI/SceneView.h \
     Session.h \
-    Utility/Deplu.h \
-    Utility/DepluArray.h \
-    Utility/DepluClass.h \
-    Utility/DepluAttrib.h \
-    Exception/DepluException.h
+    Exception/DepluException.h \
+    Utility/StringUtils.h \
 
 FORMS    += \
     GUI/MainWindow.ui \

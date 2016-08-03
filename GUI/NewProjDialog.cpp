@@ -344,34 +344,52 @@ void NewProjDialog::saveProject(){
             return;
         }
 
-        toProjDepluFile
-                << "deplu : "
-                << "\n    version: 001"
-                << "\n.."
-                << "\nproperties : "
-                << "\n    name : \'" << projName << "\'"
-                << "\n    crudeVersion : \'2016.0.1\'"
-                << "\n    hash : \'" << tmpSession->getHash() << "\'"
-                << "\n    date : \'" << tmpSession->getDate() << "\'"
-                << "\n    extra : _"
-                << "\n.."
-                << "\n";
+        QString depluHeader =
+                "deplu:"
+                "\n    version: 001"
+                "\n    extra: _"
+                "\n..";
 
-        toHistoryDepluFile
-                << "deplu : "
-                << "\n    version: 001"
-                << "\n.."
-                << "\nproperties : "
-                << "\n    name : \'" << projName << "\'"
-                << "\n    crudeVersion : \'2016.0.1\'"
-                << "\n    hash : \'" << tmpSession->getHash() << "\'"
-                << "\n    date : \'" << tmpSession->getDate() << "\'"
-                << "\n    extra : _"
-                << "\n.."
-                << "\nlog : index, historyIndex, isUsed, type, details ["
-                << "\n    _"
-                << "\n]"
-                << "\n";
+        toProjDepluFile <<
+                depluHeader +
+                "\nproperties:"
+                "\n    type: 'project'"
+                "\n    name: _"
+                "\n    hash:" + tmpSession->getHash(10) +
+                "\n    crudeVersion:" + tmpSession->getVersion() +
+                "\n    dateCreated: " + tmpSession->getDate() +
+                "\n    dateModified: " + tmpSession->getDate() +
+                "\n    extra: _"
+                "\n.."
+                "\nfiles:"
+                "\n    groups: name, path, extension, extra [_]"
+                "\n    models: name, path, extension, extra [_]"
+                "\n    meshFrames: name, path, extension, extra [_]"
+                "\n    skeletons: name, path, extension, extra [_]"
+                "\n    skins: name, path, extension, extra [_]"
+                "\n    animations: name, path, extension, extra [_]"
+                "\n    extra: _"
+                "\n.."
+                "\nfolders:"
+                "\n    models: name, path, extension, extra [_]"
+                "\n    images: name, path, extension, extra [_]"
+                "\n    skeletons: name, path, extension, extra [_]"
+                "\n    versions: name, path, extension, extra [_]"
+                "\n    extra: _"
+                "\n..";
+
+        toHistoryDepluFile <<
+                depluHeader +
+                "\nproperties:"
+                "\n    type: 'history'"
+                "\n    name: _"
+                "\n    hash:" + tmpSession->getHash(10) +
+                "\n    crudeVersion:" + tmpSession->getVersion() +
+                "\n    dateCreated: " + tmpSession->getDate() +
+                "\n    dateModified: " + tmpSession->getDate() +
+                "\n    extra: _"
+                "\n.."
+                "\nlog: index, used, type, details, date, extra [_]";
 
         // creating versions subfolder
         QDir dir2(projPath);
